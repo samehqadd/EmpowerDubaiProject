@@ -1,0 +1,29 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CD
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  - name: Skyline DataMiner Deploy Action
+  # You may pin to the exact commit or the version.
+  # uses: SkylineCommunications/Skyline-DataMiner-Deploy-Action@855c668a46162887f36a24c8bd67c4127c2d6eef
+  uses: SkylineCommunications/Skyline-DataMiner-Deploy-Action@v1.0.30
+  with:
+    api-key: ${{ secrets.DATAMINER_DEPLOY_KEY }} 
+    solution-path: AutomationScript.sln 
+    artifact-name: EmpowerHelloWorld 
+    version: 1.0.1 
+    timeout: # optional, default is 900   
+    stage: # optional, default is All 
+    artifact-id: build-number: ${{ github.run_number }}
